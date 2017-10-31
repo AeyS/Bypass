@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>目录</title>
+	<meta name="renderer" content="webkit">
+	<link rel="stylesheet" href="zui/dist/css/zui.min.css">
+	<link href="zui/dist/lib/uploader/zui.uploader.min.css" rel="stylesheet">
+</head>
+<body>
+	<!--对话框-->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+					<h4 class="modal-title">警告</h4>
+				</div>
+				<div class="modal-body">
+					<p>是否删除该文件？</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--上传文件-->
+	<div id="uploaderExample" class="uploader">
+		<div class="file-list" data-drag-placeholder="请拖拽文件到此处"></div>
+		<button type="button" class="btn btn-primary uploader-btn-browse"><i class="icon icon-cloud-upload"></i> 选择文件</button>
+	</div>
+	<data-list>
+	</data-list>
+	<!--<script src="vue.js"></script>-->
+	<script src="zui/dist/js/jquery.js"></script>
+	<script src="zui/dist/js/zui.js"></script>
+	<script src="zui/dist/lib/uploader/zui.uploader.min.js"></script>
+	<script>
+		$("document").ready(function () {
+            $.get("/list", function (data) {
+                $("data-list").html(data);
+            });
+            $('#uploaderExample').uploader({
+                multipart: true,
+                autoUpload: true,            // 当选择文件后立即自动进行上传操作
+                url: 'uploader'  // 文件上传提交地址
+            });
+        })
+	</script>
+</body>
+</html>
